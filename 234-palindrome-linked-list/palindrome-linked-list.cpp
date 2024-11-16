@@ -11,6 +11,7 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
+        if (!head) return true;
         stack<int> st;
         ListNode* temp = head;
         while(temp) {
