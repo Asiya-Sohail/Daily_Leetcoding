@@ -45,7 +45,9 @@ public:
         if (right != nullptr) {
             curr->next = right;
         }
-        return dummy->next;
+        ListNode* res = dummy->next;
+        delete dummy;
+        return res;
     }
 
     //MERGE SORT OF LINKED LISTS
