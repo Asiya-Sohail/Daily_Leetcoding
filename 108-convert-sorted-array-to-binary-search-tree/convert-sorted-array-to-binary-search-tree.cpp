@@ -12,8 +12,7 @@
 class Solution {
 public:
     TreeNode* sortedArrayToBST(vector<int>& nums) {
-        
-        if (nums.size() == 0) return nullptr;
+        // if (nums.size() == 0) return nullptr;
         return helper(nums, 0, nums.size()-1);
     }
 
