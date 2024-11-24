@@ -1,16 +1,17 @@
 class DataStream {
-    int k, val, cnt = 0;
+    int k, val, cnt;
 public:
     DataStream(int _val, int _k) {
-        val = _val; k = _k;
+        val = _val; k = _k; cnt = 0;
     }
     
     bool consec(int num) {
         if (num == val) cnt++;
         else cnt = 0;
         
-        if (cnt >= k) return true;
-        else return false;
+        // if (cnt >= k) return true;
+        // else return false;
+        return cnt >= k;
     }
 };
 
