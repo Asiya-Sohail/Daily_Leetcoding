@@ -1,28 +1,27 @@
 class MyCircularQueue {
-    int max_size;
-    int size;
-    int *arr,front, rear;
+    int len;
+    vector<int> arr;
+    int front , rear;
     
 public:
     MyCircularQueue(int k) {
-        max_size = k;
-        arr = new int[k];
-        front = size = 0;
-        rear = -1;
+        arr.resize(k);
+        front = rear = -1;    
+        len = k;
     }
     
     bool enQueue(int value) {
         if (isFull()) return false;
-        rear = (rear + 1) % max_size;
+        if (front == -1 && rear == -1) front = rear = 0;
+        else rear = (rear + 1) % len;
         arr[rear] = value;
-        size++;
         return true;
     }
     
     bool deQueue() {
         if (isEmpty()) return false;
-        front = (front+1) % max_size;
-        size--;
+        if (front == rear) front = rear = -1;
+        else front = (front+1) % len;
         return true;
     }
     
@@ -37,13 +36,65 @@ public:
     }
     
     bool isEmpty() {
-        return size == 0;
+        if (rear == -1 && front == -1) return true;
+        else return false;
     }
     
     bool isFull() {
-        return size == max_size;
+        if ((rear + 1) % len == front) return true;
+        else return false;
     }
 };
+
+
+// class MyCircularQueue {
+//     int max_size;
+//     int size;
+//     int *arr,front, rear;
+    
+// public:
+//     MyCircularQueue(int k) {
+//         max_size = k;
+//         arr = new int[k];
+//         front = size = 0;
+//         rear = -1;
+//     }
+    
+//     bool enQueue(int value) {
+//         if (isFull()) return false;
+//         rear = (rear + 1) % max_size;
+//         arr[rear] = value;
+//         size++;
+//         return true;
+//     }
+    
+//     bool deQueue() {
+//         if (isEmpty()) return false;
+//         front = (front+1) % max_size;
+//         size--;
+//         return true;
+//     }
+    
+//     int Front() {
+//         if (isEmpty()) return -1;
+//         return arr[front];
+//     }
+    
+//     int Rear() {
+//         if (isEmpty()) return -1;
+//         return arr[rear];
+//     }
+    
+//     bool isEmpty() {
+//         return size == 0;
+//     }
+    
+//     bool isFull() {
+//         return size == max_size;
+//     }
+// };
+
+
 
 /**
  * Your MyCircularQueue object will be instantiated and called as such:
