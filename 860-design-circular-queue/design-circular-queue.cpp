@@ -1,100 +1,78 @@
 class MyCircularQueue {
-    int len;
-    vector<int> arr;
-    int front , rear;
-    
+private:
+    struct Node {
+        int data;
+        Node* next;
+        Node(int val) : data(val), next(nullptr) {}
+    };
+
+    Node* front; // Pointer to the front of the queue
+    Node* rear;  // Pointer to the rear of the queue
+    int size;    // Maximum size of the queue
+    int count;   // Current number of elements in the queue
+
 public:
     MyCircularQueue(int k) {
-        arr.resize(k);
-        front = rear = -1;    
-        len = k;
+        size = k;
+        front = rear = nullptr;
+        count = 0;
     }
     
     bool enQueue(int value) {
-        if (isFull()) return false;
-        if (front == -1 && rear == -1) front = rear = 0;
-        else rear = (rear + 1) % len;
-        arr[rear] = value;
+        if (isFull()) {
+            return false;
+        }
+
+        Node* newNode = new Node(value);
+
+        if (isEmpty()) {
+            front = rear = newNode;
+            rear->next = front; // Create circular link
+        } else {
+            rear->next = newNode;
+            rear = newNode;
+            rear->next = front; // Maintain circular link
+        }
+
+        count++;
         return true;
     }
     
     bool deQueue() {
-        if (isEmpty()) return false;
-        if (front == rear) front = rear = -1;
-        else front = (front+1) % len;
+        if (isEmpty()) {
+            return false;
+        }
+
+        if (front == rear) { // Only one element in the queue
+            delete front;
+            front = rear = nullptr;
+        } else {
+            Node* temp = front;
+            front = front->next;
+            rear->next = front; // Maintain circular link
+            delete temp;
+        }
+
+        count--;
         return true;
     }
     
     int Front() {
-        if (isEmpty()) return -1;
-        return arr[front];
+        return isEmpty() ? -1 : front->data;
     }
     
     int Rear() {
-        if (isEmpty()) return -1;
-        return arr[rear];
+        return isEmpty() ? -1 : rear->data;
     }
     
     bool isEmpty() {
-        if (rear == -1 && front == -1) return true;
-        else return false;
+        return count == 0;
     }
     
     bool isFull() {
-        if ((rear + 1) % len == front) return true;
-        else return false;
+        return count == size;
     }
 };
-
-
-// class MyCircularQueue {
-//     int max_size;
-//     int size;
-//     int *arr,front, rear;
-    
-// public:
-//     MyCircularQueue(int k) {
-//         max_size = k;
-//         arr = new int[k];
-//         front = size = 0;
-//         rear = -1;
-//     }
-    
-//     bool enQueue(int value) {
-//         if (isFull()) return false;
-//         rear = (rear + 1) % max_size;
-//         arr[rear] = value;
-//         size++;
-//         return true;
-//     }
-    
-//     bool deQueue() {
-//         if (isEmpty()) return false;
-//         front = (front+1) % max_size;
-//         size--;
-//         return true;
-//     }
-    
-//     int Front() {
-//         if (isEmpty()) return -1;
-//         return arr[front];
-//     }
-    
-//     int Rear() {
-//         if (isEmpty()) return -1;
-//         return arr[rear];
-//     }
-    
-//     bool isEmpty() {
-//         return size == 0;
-//     }
-    
-//     bool isFull() {
-//         return size == max_size;
-//     }
-// };
-
-
 
 /**
  * Your MyCircularQueue object will be instantiated and called as such:
