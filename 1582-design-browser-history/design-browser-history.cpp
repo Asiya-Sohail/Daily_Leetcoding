@@ -1,33 +1,40 @@
 class BrowserHistory {
-    stack<string> hist, forw;
-    string curr;
+    struct Node {
+        string url;
+        Node* prev;
+        Node* next;
+        Node(string u) : url(u) {
+            prev = next = nullptr;
+        }
+    };
+    
+    Node* curr;
 public:
     BrowserHistory(string homepage) {
-        curr = homepage;
+        curr = new Node(homepage);
     }
     
     void visit(string url) {
-        hist.push(curr);
-        curr = url;
-        while (!forw.empty()) forw.pop(); // Clear forward stack
+        Node* temp = new Node(url);
+        curr->next = temp;
+        temp->prev = curr;
+        curr = temp;
     }
     
     string back(int steps) {
-        int i = 0;
-        while (!hist.empty() && i < steps) {
-            forw.push(curr);
-            curr = hist.top(); hist.pop(); i++;
+        while (steps > 0 && curr->prev != nullptr) {
+            curr = curr->prev;
+            steps--;
         }
-        return curr;
+        return curr->url;
     }
     
     string forward(int steps) {
-        int i = 0;
-        while (!forw.empty() && i < steps) {
-            hist.push(curr);
-            curr = forw.top(); forw.pop(); i++;
+        while (steps > 0 && curr->next != nullptr) {
+            curr = curr->next;
+            steps--;
         }
-        return curr;
+        return curr->url;
     }
 };
 
