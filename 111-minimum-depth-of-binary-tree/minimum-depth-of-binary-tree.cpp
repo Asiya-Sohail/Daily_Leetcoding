@@ -14,8 +14,10 @@ public:
     int minDepth(TreeNode* root) {
         if (!root) return 0;
         
-        int left = (root->left) ? minDepth(root->left) : 0;
-        int right = (root->right) ? minDepth(root->right) : 0;
+        int left = minDepth(root->left);
+        int right = minDepth(root->right);
+                             
+        if (!root->left && !root->right) return 1;
         
         if (!root->left) return 1 + right;
         if (!root->right) return 1 + left;
