@@ -21,16 +21,22 @@ public:
 //         return true;
 
         //Reverse Function approach
-        string str;
+    //     string str;
+    //     for (char c : s) {
+    //         if (isalnum(c))
+    //             str += tolower(c);
+    //     }
+    //     string temp = str;
+    //     reverse(temp.begin(), temp.end());
+    //     return str == temp;
+        
+        //Vector Approach
+        vector<char> filt;
         for (char c : s) {
             if (isalnum(c))
-                str += tolower(c);
+                filt.push_back(tolower(c));
         }
-        string temp = str;
-        reverse(temp.begin(), temp.end());
-        if (str != temp)
-            return false;
-        else 
-            return true;
+        vector<char> reversed(filt.rbegin(), filt.rend());
+        return filt == reversed;
     }
 };
