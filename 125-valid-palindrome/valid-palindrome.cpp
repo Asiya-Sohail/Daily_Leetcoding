@@ -14,8 +14,9 @@ public:
 
             if (tolower(s[left]) != tolower(s[right]))
                 return false;
-                
-            left++; right--;
+            else {
+                left++; right--;
+            }    
         }
         return true;
     }
