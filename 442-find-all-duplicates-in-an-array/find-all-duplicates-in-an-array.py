@@ -6,9 +6,15 @@ class Solution(object):
         """
         seen = set()
         duplicate = []
-        for i in nums:
-            if i in seen and i not in duplicate:
-                duplicate.append(i)
-            seen.add(i)
-        return duplicate
+        # for i in nums:
+        #     if i in seen and i not in duplicate:
+        #         duplicate.append(i)
+        #     seen.add(i)
+        # return duplicate
         
+        for i in nums:
+            if i in seen:
+                duplicate.append(i)
+            else:
+                seen.add(i)
+        return duplicate
