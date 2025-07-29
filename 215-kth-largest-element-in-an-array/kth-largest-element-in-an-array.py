@@ -5,4 +5,6 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        return sorted(nums, reverse=True)[k-1]
+        # return sorted(nums, reverse=True)[k-1]
+        nums.sort()
+        return nums[len(nums) - k]
