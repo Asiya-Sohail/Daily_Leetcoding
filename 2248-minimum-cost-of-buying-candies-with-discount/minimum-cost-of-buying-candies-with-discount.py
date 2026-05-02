@@ -4,10 +4,9 @@ class Solution(object):
         :type cost: List[int]
         :rtype: int
         """
-        cost.sort()
-        lst = []
-        for i, a in enumerate(cost):
-            if (len(cost) - i) % 3:
-                lst.append(a)
-                
-        return sum(lst)
+        cost.sort(reverse=True)
+        c = 0
+        for i in range(len(cost)):
+            if i % 3 != 2:
+                c += cost[i]
+        return c
