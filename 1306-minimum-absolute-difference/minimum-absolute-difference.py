@@ -6,23 +6,15 @@ class Solution(object):
         """
         arr.sort()
         minimum = 9999999999
-        left = 0
-        right = 1
-        for i in range(len(arr)-1):
-            val = arr[right] - arr[left] 
-            if val <= minimum:
-                minimum = val
-            left += 1
-            right += 1
-        result = []
-        left = 0
-        right = 1
-        
-        for i in range(len(arr)-1):
-            if arr[right] - arr[left] == minimum:
-                result.append([arr[left], arr[right]])
-            left += 1
-            right += 1
 
+        for i in range(1, len(arr)):
+            minimum = min(minimum, arr[i]-arr[i-1])
+
+        result = []
+
+        for i in range(1, len(arr)):
+            if arr[i] - arr[i-1] == minimum:
+                result.append([arr[i-1], arr[i]])
+            
         return result
         
