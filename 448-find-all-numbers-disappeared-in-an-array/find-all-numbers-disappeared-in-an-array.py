@@ -4,10 +4,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        length = len(nums)
-        result = []
-        set_nums = set(nums)
-        for i in range(1, length+1):
-            if i not in set_nums:
-                result.append(i)
-        return result
+        # return [i for i in range(1, len(nums)+1) if i not in nums] O(n^2)
+        check = {}
+        res = []
+        for i in range(1, len(nums)+1):
+            check[str(i)] = 0
+
+        for i in nums:
+            check[str(i)] += 1
+
+        return [int(key) for key, val in check.items() if val == 0 ]
+
+        
+
+        
