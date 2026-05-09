@@ -4,10 +4,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        #Bitwise XOR Approach
-        xor = 0
-        for i in range(len(nums)):
-            xor = xor ^ nums[i]
-            
-        return xor
-        
+        if len(nums) <= 2:
+            return nums[0]
+
+        nums.sort()
+        i=0
+        while  (i < len(nums)-1):
+            if nums[i] != nums[i+1]:
+                return nums[i]
+            else:
+                i += 1
+            i+=1
+        return nums[-1]
