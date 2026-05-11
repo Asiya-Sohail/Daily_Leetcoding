@@ -4,17 +4,17 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        seen = {}
-        for i in strs:
-            s = "".join(sorted(i))
-            # print(s)
-            if s in seen.keys():
-                seen[s].append(i)
+        freq = {}
+        for s in strs:
+            sort = ''.join(sorted(s))
+            if sort in freq:
+                freq[sort].append(s)
             else:
-                seen[s] = [i]
-                # seen[s].append(i)
+                freq[sort] = [s]
 
-        lst = [y for x, y in seen.items()]
-        return lst
-        
+        res = []
+        for i in freq:
+            res.append(freq[i])
+        return res
+
         
