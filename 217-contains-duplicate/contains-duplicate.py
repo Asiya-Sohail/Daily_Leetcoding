@@ -4,12 +4,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
-        freq = {}
+        # freq = {}
+        # for i in nums:
+        #     freq[i] = freq.get(i, 0) + 1
+        # for x in freq:
+        #     if freq[x] > 1:
+        #         return True
+        # return False
+        check = set()
         for i in nums:
-            freq[i] = freq.get(i, 0) + 1
-        for x in freq:
-            if freq[x] > 1:
+            if i in check:
                 return True
+            else:
+                check.add(i)
         return False
 
         
