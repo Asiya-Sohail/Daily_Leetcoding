@@ -10,14 +10,14 @@ class Solution(object):
         if num < 0:
             sign = True
         num = abs(num)
-        res = ''
+        res = []
         while num > 0:
             t = num % 7
             num //= 7
-            res += str(t)
+            res.append(str(t))
         if sign:
-            return '-' + res[::-1]
+            return '-' + ''.join(res[::-1])
         else:
-            return res[::-1]
+            return ''.join(res[::-1])
 
         
